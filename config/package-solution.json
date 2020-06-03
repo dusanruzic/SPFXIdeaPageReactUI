@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "idea-page-spfx-client-side-solution",
+    "id": "d0f60bbb-9324-416c-ab7d-81d83d596bb2",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true
+  },
+  "paths": {
+    "zippedPackage": "solution/idea-page-spfx.sppkg"
+  }
+}
