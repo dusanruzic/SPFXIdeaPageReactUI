@@ -11,6 +11,10 @@ import * as strings from 'IdeaPageWebPartStrings';
 import IdeaPage from './components/IdeaPage';
 import { IIdeaPageProps } from './components/IIdeaPageProps';
 
+import SharePointService from '../../services/SharePoint/SharePointService';
+import {Environment } from '@microsoft/sp-core-library';
+
+
 export interface IIdeaPageWebPartProps {
   description: string;
 }
@@ -27,6 +31,13 @@ export default class IdeaPageWebPart extends BaseClientSideWebPart<IIdeaPageWebP
 
     ReactDom.render(element, this.domElement);
   }
+  public onInit(): Promise<void> {
+    return super.onInit().then(() =>{
+
+      let itemID = 13;
+      SharePointService.setup(this.context, Environment.type, itemID);
+
+  });}
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
