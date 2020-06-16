@@ -23,7 +23,7 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
           authorName: ''
         };
         let imgs : any[] = [];
-        SharePointService.getListItem('CF70FB14-EE3E-4D16-921A-3449856770E7', SharePointService.itemID).then(item =>{
+        SharePointService.getListItem(SharePointService.ideaListID, SharePointService.itemID).then(item =>{
           this.setState({
             item: item,
             authorName: item.Author.Title
@@ -83,7 +83,6 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
 
     return (
       <div >
-        <h1>HOMEPAGE</h1>
         <hr></hr>
         <div className="ms-Grid" dir="ltr">
           <div className="ms-Grid-row">
@@ -130,7 +129,7 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
 
 
   public getItem(itemID: number): void {
-    SharePointService.getListItem('CF70FB14-EE3E-4D16-921A-3449856770E7', itemID)
+    SharePointService.getListItem(SharePointService.ideaListID, itemID)
       .then(item => {
         this.setState({
           item: item

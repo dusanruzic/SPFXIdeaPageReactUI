@@ -33,9 +33,9 @@ export default class IdeaPageWebPart extends BaseClientSideWebPart<IIdeaPageWebP
   }
   public onInit(): Promise<void> {
     return super.onInit().then(() =>{
-
+      let ideaListID = 'CF70FB14-EE3E-4D16-921A-3449856770E7';
       let itemID = 13;
-      SharePointService.setup(this.context, Environment.type, itemID);
+      SharePointService.setup(this.context, Environment.type, itemID, ideaListID);
 
   });}
 

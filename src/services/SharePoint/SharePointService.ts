@@ -9,11 +9,13 @@ export class SharePointServiceManager {
     public context: WebPartContext;
     public environmentType: EnvironmentType;
     public itemID: number;
+    public ideaListID: string;
 
-    public setup(context: WebPartContext, environmentType: EnvironmentType, itemID: number): void {
+    public setup(context: WebPartContext, environmentType: EnvironmentType, itemID: number, ideaListID: string): void {
         this.context = context;
         this.environmentType = environmentType;
         this.itemID = itemID;
+        this.ideaListID = ideaListID;
     }
 
     public get(relativeEndpointUrl: string): Promise<any> {

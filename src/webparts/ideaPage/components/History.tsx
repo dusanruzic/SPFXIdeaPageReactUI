@@ -140,7 +140,7 @@ export  class History extends React.Component<{}, IDetailsListDocumentsExampleSt
     });
     console.log(this.state.itemId);
 
-    SharePointService.getListItemVersions('CF70FB14-EE3E-4D16-921A-3449856770E7', this.state.itemId).then(itemVersions =>{
+    SharePointService.getListItemVersions(SharePointService.ideaListID, this.state.itemId).then(itemVersions =>{
       
       this.setState({items: itemVersions.value,
      });
@@ -152,7 +152,7 @@ export  class History extends React.Component<{}, IDetailsListDocumentsExampleSt
   public render(): React.ReactElement<{}> {
     return (
       <div >
-        <h1>HISTORY PAGE</h1>
+        <h1>Item history</h1>
         <DetailsList
               items={this.state.items}
               compact={this.state.isCompactMode}

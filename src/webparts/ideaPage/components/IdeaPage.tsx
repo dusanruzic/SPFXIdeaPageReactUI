@@ -4,6 +4,7 @@ import { IIdeaPageProps } from './IIdeaPageProps';
 import {Home} from './Home';
 import {History} from './History';
 import {Formula} from './Formula';
+import {Workflow} from './Workflow'
 //import {Nav} from './Nav';
 //import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -38,12 +39,16 @@ export default class IdeaPage extends React.Component<IIdeaPageProps, {}> {
           <Home itemId={SharePointService.itemID}></Home>
           
         </PivotItem>
+        <PivotItem headerText="Formula">
+          <Formula></Formula>
+        </PivotItem>
         <PivotItem headerText="History">
           <History></History>
         </PivotItem>
         <PivotItem headerText="Approval">
-          <Formula></Formula>
+          <Workflow></Workflow>
         </PivotItem>
+        
       </Pivot>  
       
 
