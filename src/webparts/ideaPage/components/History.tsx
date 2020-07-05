@@ -100,7 +100,9 @@ export  class History extends React.Component<{}, IDetailsListDocumentsExampleSt
         onColumnClick: this._onColumnClick,
         data: 'string',
         onRender: (item: IDocument) => {
-          return <span>{item.Modified}</span>;
+          let createdOn = new Date(item.Modified);
+          let formatedDate = `${createdOn.toLocaleString("default", { month: "long" })} ${createdOn.getDate()}, ${createdOn.getFullYear()} at ${createdOn.toLocaleTimeString()}`;
+          return <span>{formatedDate}</span>;
         },
         isPadded: true,
       },
@@ -138,13 +140,13 @@ export  class History extends React.Component<{}, IDetailsListDocumentsExampleSt
         });
       },
     });
-    console.log(this.state.itemId);
+    //console.log(this.state.itemId);
 
     SharePointService.getListItemVersions(SharePointService.ideaListID, this.state.itemId).then(itemVersions =>{
       
       this.setState({items: itemVersions.value,
      });
-     console.log(this.state.items);
+     //console.log(this.state.items);
     });
     
   }

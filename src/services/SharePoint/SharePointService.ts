@@ -19,7 +19,7 @@ export class SharePointServiceManager {
     }
 
     public get(relativeEndpointUrl: string): Promise<any> {
-        console.log(`${this.context.pageContext.web.absoluteUrl}${relativeEndpointUrl}`);
+        //console.log(`${this.context.pageContext.web.absoluteUrl}${relativeEndpointUrl}`);
         return this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}${relativeEndpointUrl}`, SPHttpClient.configurations.v1)
         .then(
             response => {
@@ -48,7 +48,7 @@ export class SharePointServiceManager {
     }
 
     public getListItemsFIltered(listId: string, filterString: string) : Promise<IListItemCollection>{
-        console.log(`/_api/lists/getbyid('${listId}')/items?$filter=IdeaStatus eq '${filterString}'`);
+        //console.log(`/_api/lists/getbyid('${listId}')/items?$filter=IdeaStatus eq '${filterString}'`);
         return this.get(`/_api/lists/getbyid('${listId}')/items?$select=*,Author/Name,Author/Title,LinkToSpec/Title&$expand=Author/Id,LinkToSpec/Id,AttachmentFiles&$filter=IdeaStatus eq '${filterString}'`);
     }
     
@@ -67,6 +67,41 @@ export class SharePointServiceManager {
     
     public getUsers(): Promise<any> {
         return this.get(`/_api/web/siteusers`);
+    }
+
+    public getGroupsOfCurrentUser(): Promise<any> {
+        return this.get(`/_api/web/currentuser/groups`);
+    }
+
+    public changeStatus(relativeEndpointUrl: string, newStatus: string) {
+        
+        return this.context.spHttpClient.fetch(`${this.context.pageContext.web.absoluteUrl}${relativeEndpointUrl}`, SPHttpClient.configurations.v1,{
+            
+            method: "PATCH",
+            
+            headers: {
+                'Accept': 'application/json;odata=nometadata',
+                'Content-type': 'application/json;odata=verbose',
+                'odata-version': '',
+                'if-match': '*',
+            },
+            
+            body : JSON.stringify({
+                '__metadata': {
+                    'type': 'SP.Data.IdeaListItem'
+                },
+                "IdeaStatus": newStatus
+
+            })
+        })
+        .then(
+            response => {
+                return response.status;
+            }
+        )
+        .catch(error => {
+            return Promise.reject(error);
+        });
     }
      
     

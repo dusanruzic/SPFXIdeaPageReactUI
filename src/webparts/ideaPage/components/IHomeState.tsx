@@ -5,5 +5,8 @@ export interface IHomeState {
     images: any[];
     currentImg: string;
     color: string;
+    colorButtons: string;
     authorName: string;
+    isSoftwareDev: boolean;
+
 }

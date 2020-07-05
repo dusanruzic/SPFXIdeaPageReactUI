@@ -37,17 +37,21 @@ export default class IdeaPage extends React.Component<IIdeaPageProps, {}> {
           }}
         >
           <Home itemId={SharePointService.itemID}></Home>
-          
+
         </PivotItem>
+
+        <PivotItem headerText="Approval">
+        <Workflow></Workflow>
+        </PivotItem>
+
         <PivotItem headerText="Formula">
           <Formula></Formula>
         </PivotItem>
+        
         <PivotItem headerText="History">
           <History></History>
         </PivotItem>
-        <PivotItem headerText="Approval">
-          <Workflow></Workflow>
-        </PivotItem>
+        
         
       </Pivot>  
       
