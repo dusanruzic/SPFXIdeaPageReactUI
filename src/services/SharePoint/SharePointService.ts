@@ -40,11 +40,11 @@ export class SharePointServiceManager {
     }
 
     public getListItem(listId: string, itemId: number){
-        return this.get(`/_api/lists/getbyid('${listId}')/items(${itemId})?$select=*,Author/Name,Author/Title,LinkToSpec/Title&$expand=Author/Id,LinkToSpec/Id,AttachmentFiles`);
+        return this.get(`/_api/lists/getbyid('${listId}')/items(${itemId})?$select=*,Author/Name,Author/Title,Author/EMail,LinkToSpec/Title&$expand=Author/Id,LinkToSpec/Id,AttachmentFiles`);
     }
 
     public getListItemVersions(listId: string, itemId: number){
-        return this.get(`/_api/lists/getbyid('${listId}')/items(${itemId})/versions?$select=*,Author/Name,Author/Title,LinkToSpec/Title&$expand=Author/Id,LinkToSpec/Id,AttachmentFiles`);
+        return this.get(`/_api/lists/getbyid('${listId}')/items(${itemId})/versions?$select=*,Author/Name,Author/Title,LinkToSpec/Title&$expand=Author/Id,LinkToSpec/Id,AttachmentFiles&$orderby=Created asc`);
     }
 
     public getListItemsFIltered(listId: string, filterString: string) : Promise<IListItemCollection>{
@@ -93,6 +93,43 @@ export class SharePointServiceManager {
                 "IdeaStatus": newStatus
 
             })
+        })
+        .then(
+            response => {
+                return response.status;
+            }
+        )
+        .catch(error => {
+            return Promise.reject(error);
+        });
+    }
+
+
+    public updateIdea(name, desc, formula, status){
+
+        const body = JSON.stringify({
+            '__metadata': {
+                'type': 'SP.Data.IdeaListItem'
+            },
+            'Title': name,
+            'Comment1': desc,
+            'IdeaFormula': formula,
+            "IdeaStatus": status
+        })
+        //console.log(name);
+        //console.log(desc);
+        //console.log(formula);
+        //console.log(this.context.pageContext.web.absoluteUrl);
+        return this.context.spHttpClient.fetch(`${this.context.pageContext.web.absoluteUrl}/_api/lists/getbyid('${this.ideaListID}')/items(${this.itemID})`, SPHttpClient.configurations.v1,
+        {
+            headers: {
+                'Accept': 'application/json;odata=nometadata',
+                'Content-type': 'application/json;odata=verbose',
+                'odata-version': '',
+                'if-match': '*',
+            },
+            method: "PATCH",
+            body: body
         })
         .then(
             response => {

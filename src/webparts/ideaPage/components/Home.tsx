@@ -35,6 +35,7 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
             item: item,
             authorName: item.Author.Title
           })
+          
           //console.log(this.state.authorName);
           if (item.Attachments){ 
             item.AttachmentFiles.map (img => {
@@ -264,7 +265,7 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
           //changed : true
         });
         this.checkColors();
-
+        
       });
       
     });
