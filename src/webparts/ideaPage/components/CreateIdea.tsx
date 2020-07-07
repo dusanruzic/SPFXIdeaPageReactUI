@@ -236,7 +236,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
             Textual formula:
           </h3>
           
-        <input
+        {/*<input
           type="text"
           style={{width:'100%'}}
           value={this.state.formula}
@@ -244,6 +244,11 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
           onChange={this.promenaGlavnog}
           //placeholder='Here you put whole formula'
         />
+        */}
+        
+        <TextField id='name' value={this.state.formula} multiline
+          placeholder="Enter formula here directly or use left helpbar with predefined elements"
+          onChange={this.promenaGlavnog}/>
 
 
           <h3 style={{textAlign: 'center' }}>
