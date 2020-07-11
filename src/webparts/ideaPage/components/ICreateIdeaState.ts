@@ -8,5 +8,5 @@ export interface ICreateIdeaState {
   newPageName: string;
   optionSelected: string;
   item: any;
-
+  has_error: boolean;
 }

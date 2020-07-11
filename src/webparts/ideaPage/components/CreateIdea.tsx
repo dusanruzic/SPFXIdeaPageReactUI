@@ -18,6 +18,7 @@ import {  PrimaryButton } from 'office-ui-fabric-react';
 import MathJax from 'react-mathjax-preview'
 import styles from './CreateIdea.module.scss';
 import SharePointService from '../../../services/SharePoint/SharePointService';
+import { Dialog, DialogType } from 'office-ui-fabric-react/lib/Dialog';
 
 
 
@@ -28,6 +29,13 @@ import SharePointService from '../../../services/SharePoint/SharePointService';
     //const MathJax = require('react-mathjax');
 
 */
+
+const dialogContentProps = {
+  type: DialogType.largeHeader,
+  title: 'Missing Fields',
+  subText: 'Some required field is not filled. Please provide content to all required fields. ',
+};
+
 export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaState> {
 
   constructor (props: ICreateIdeaProps) {
@@ -35,6 +43,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
     this.handleChange = this.handleChange.bind(this);
     this.promenaGlavnog = this.promenaGlavnog.bind(this);
+    this.toggleHideDialog = this.toggleHideDialog.bind(this);
 
     this.space = this.space.bind(this);
     this.newline = this.newline.bind(this);
@@ -101,6 +110,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
       newPageName: "",
       optionSelected: 'A',
       item: {},
+      has_error: false,
     }
 
     SharePointService.getListItem(SharePointService.ideaListID, SharePointService.itemID).then(rs => {
@@ -263,6 +273,12 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
         </div>
 
+          <Dialog
+            hidden={!this.state.has_error}
+            onDismiss={this.toggleHideDialog}
+            dialogContentProps= {dialogContentProps}
+            
+          />
         </div>
 
         
@@ -1053,7 +1069,12 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
   public UpdateIdea() {
     if(this.state.name == '' || this.state.desc == ''){
       //console.log('dopuni');
-      //console.log(this.state.name);                                         
+      //console.log(this.state.name); 
+      dialogContentProps.title = 'Idea was not updated';
+      dialogContentProps.subText = 'Please fill all required fields for updating idea'
+      this.setState({
+        has_error: true
+      })                                        
     }
     else {
       //console.log('prihvatio');
@@ -1062,6 +1083,13 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
       
       SharePointService.updateIdea(this.state.name, this.state.desc, this.state.formula, this.state.item.IdeaStatus).then (result => {
         //console.log(result);
+        if (result == '204'){
+          dialogContentProps.title = 'Idea updated successfully';
+          dialogContentProps.subText = 'You have updated successfully this idea'
+          this.setState({
+            has_error: true
+          })
+        }
                 
       });
       
@@ -1084,5 +1112,11 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
     }); 
   }
 
+  public toggleHideDialog() {
+    let has_err = !this.state.has_error;
+    this.setState({
+      has_error: has_err,
+    })
+  }
 
 }

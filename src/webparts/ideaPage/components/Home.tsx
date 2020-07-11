@@ -4,6 +4,14 @@ import {IHomeState} from './IHomeState';
 import {IHomeProps} from './IHomeProps';
 import styles from './Home.module.scss';
 import { Label } from 'office-ui-fabric-react/lib/Label';
+import { Dialog, DialogType } from 'office-ui-fabric-react/lib/Dialog';
+
+
+const dialogContentProps = {
+  type: DialogType.largeHeader,
+  title: 'Missing Fields',
+  subText: 'Some required field is not filled. Please provide content to all required fields. ',
+};
 
 
 export  class Home extends React.Component<IHomeProps, IHomeState> {
@@ -17,6 +25,7 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
         this.downgradeStatus = this.downgradeStatus.bind(this);
         this.upgradeStatus = this.upgradeStatus.bind(this);
         this.checkGroup = this.checkGroup.bind(this);
+        this.toggleHideDialog = this.toggleHideDialog.bind(this);
     
         //set initial state:
         this.state = {
@@ -26,7 +35,8 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
           colorButtons: '#0078d4',
           color: 'white',
           authorName: '',
-          isSoftwareDev: false
+          isSoftwareDev: false,
+          changed: false
 
         };
         let imgs : any[] = [];
@@ -95,6 +105,12 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
     return (
       <div >
         <hr></hr>
+        <Dialog
+          hidden={!this.state.changed}
+          onDismiss={this.toggleHideDialog}
+          dialogContentProps= {dialogContentProps}
+          
+          />
         <div className="ms-Grid" dir="ltr">
           <div className="ms-Grid-row">
             <div className="ms-Grid-col ms-sm6 ms-md6 ms-lg6 ms-xl6" style={{maxHeight:'350px', marginBottom:'30px'}}>
@@ -219,14 +235,29 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
   public downgradeStatus() {
     switch (this.state.item.IdeaStatus){
       case 'OPEN':
+        dialogContentProps.title = 'Status can not be changed';
+        dialogContentProps.subText = 'It is not possible to downgrade the status. Idea is in initial status';
+        this.setState({
+          changed: true
+        });
         //console.log('ne mozes da vratis status jer je trenutno aktuelan pocetni status');
         break;
       case 'ON HOLD':
+        dialogContentProps.title = 'Status changed successfully';
+        dialogContentProps.subText = 'Status changed from ON HOLD to OPEN';
         this.changeStatus('OPEN');
+        this.setState({
+          changed: true
+        });
         //console.log('menjam u OPEN');
         break;
       case 'SWITCH TO SPEC (CLOSED)':
-        this.changeStatus('ON HOLD');
+        dialogContentProps.title = 'Status can not be changed';
+        dialogContentProps.subText = 'It is not possible to downgrade the final status. Once the idea become CLOSED, status can not be reverted';
+        
+        this.setState({
+          changed: true
+        });
         //console.log('menjam u ON HOLD');
         break;
       
@@ -240,14 +271,29 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
     
     switch (this.state.item.IdeaStatus){
       case 'OPEN':
+        dialogContentProps.title = 'Status changed successfully';
+        dialogContentProps.subText = 'Status changed from OPEN to ON HOLD';
         this.changeStatus('ON HOLD');
+        this.setState({
+          changed: true
+        });
         //console.log('menjam u under development');
         break;
       case 'ON HOLD':
+        dialogContentProps.title = 'Status changed successfully';
+        dialogContentProps.subText = 'Status changed from ON HOLD to SWITCH TO SPEC (CLOSED)';
         this.changeStatus('SWITCH TO SPEC (CLOSED)');
+        this.setState({
+          changed: true
+        });
         //console.log('menjam u implementation');
         break;
       case 'SWITCH TO SPEC (CLOSED)':
+        dialogContentProps.title = 'Status can not be changed';
+        dialogContentProps.subText = 'It is not possible to upgrade the status. Idea is in final status';
+        this.setState({
+          changed: true
+        })
         //console.log('finalni status. Nije moguce da upgradeujes status');
         break;
     }
@@ -269,6 +315,14 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
       });
       
     });
+  }
+
+  public toggleHideDialog() {
+    let has_changed = !this.state.changed;
+
+    this.setState({
+      changed: has_changed
+    })
   }
 }
 

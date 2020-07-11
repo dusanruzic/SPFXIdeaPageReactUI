@@ -8,5 +8,6 @@ export interface IHomeState {
     colorButtons: string;
     authorName: string;
     isSoftwareDev: boolean;
+    changed: boolean;
 
 }
