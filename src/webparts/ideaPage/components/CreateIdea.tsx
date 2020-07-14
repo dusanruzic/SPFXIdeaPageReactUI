@@ -317,8 +317,8 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public superscript() {
     //console.log(this.state.formula);
-    let base = prompt("Please enter base number", "Base number");
-    var exp = prompt("Please enter exponent number", "Exponent number");
+    let base = prompt("Please enter base number", "");
+    var exp = prompt("Please enter exponent number", "");
     let val = '{' + base + '}^{' + exp + '}';
     let form = this.state.formula + val;
     let mathjax = '$$'+ form + '$$';
@@ -334,8 +334,8 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public subscript() {
     //console.log(this.state.formula);
-    let base = prompt("Please enter base number", "Base number");
-    var index = prompt("Please enter index number", "Index number");
+    let base = prompt("Please enter base number", "");
+    var index = prompt("Please enter index number", "");
 
     let val = '{' + base + '}_{' + index + '}';
     let form = this.state.formula + val;
@@ -352,9 +352,9 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public superscriptSubscript() {
     //console.log(this.state.formula);
-    let base = prompt("Please enter base number", "Base number");
-    var index = prompt("Please enter index number", "Index number");
-    var exp = prompt("Please enter exponent number", "Exponent number");
+    let base = prompt("Please enter base number", "");
+    var index = prompt("Please enter index number", "");
+    var exp = prompt("Please enter exponent number", "");
 
 
     let val = '{' + base + '}_{' + index + '}^{' + exp + '}';
@@ -371,9 +371,9 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public sum() {
     //console.log(this.state.formula);
-    let base = prompt("Please enter starting value for i", "Start value");
-    var exp = prompt("Please enter end value for i", "End value");
-    var stat = prompt("Please enter statement within sum", "Statement within sum");
+    let base = prompt("Please enter starting value for i", "");
+    var exp = prompt("Please enter end value for i", "");
+    var stat = prompt("Please enter statement within sum", "");
     let val = '\\sum_{i=' + base + '}^{' + exp + '}({' + stat + ')}';
     let form = this.state.formula + val;
     let mathjax = '$$'+ form + '$$';
@@ -388,11 +388,11 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public doubleSum() {
     //console.log(this.state.formula);
-    let base1 = prompt("Please enter starting value for i", "Start value");
-    var exp1 = prompt("Please enter end value for i", "End value");
-    let base2 = prompt("Please enter starting value for j", "Start value");
-    var exp2 = prompt("Please enter end value for j", "End value");
-    var stat = prompt("Please enter statement within sum", "Statement within sum");
+    let base1 = prompt("Please enter starting value for i", "");
+    var exp1 = prompt("Please enter end value for i", "");
+    let base2 = prompt("Please enter starting value for j", "");
+    var exp2 = prompt("Please enter end value for j", "");
+    var stat = prompt("Please enter statement within sum", "");
     let val = '\\sum_{i=' + base1 + '}^{' + exp1 + '}' + '\\sum_{j=' + base2 + '}^{' + exp2 + '}{(' + stat + ')}';
     let form = this.state.formula + val;
     let mathjax = '$$'+ form + '$$';
@@ -407,8 +407,8 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public fraction() {
     //console.log(this.state.formula);
-    let numerator = prompt("Please enter numerator", "Numerator");
-    var denominator = prompt("Please enter denominator", "Denominator");
+    let numerator = prompt("Please enter numerator", "");
+    var denominator = prompt("Please enter denominator", "");
 
     let val = '\\frac{' + numerator + '}{' + denominator + '}';
     let form = this.state.formula + val;
@@ -425,9 +425,9 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public definiteIntegral() {
     //console.log(this.state.formula);
-    let lower = prompt("Please enter lower limit of the integral", "Lower limit");
-    var upper = prompt("Please enter upper limit of the integral", "Upper limit");
-    var func = prompt("Please enter value within the integral", "Value within the integral");
+    let lower = prompt("Please enter lower limit of the integral", "");
+    var upper = prompt("Please enter upper limit of the integral", "");
+    var func = prompt("Please enter value within the integral", "");
 
     let val = '\\int_{' + lower + '}^{' + upper + '}{(' + func + ')}dx';
     let form = this.state.formula + val;
@@ -444,7 +444,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public contourIntegral() {
     //console.log(this.state.formula);
-    var func = prompt("Please enter value within the integral", "Value within the contour integral");
+    var func = prompt("Please enter value within the integral", "");
 
     let val = '\\oint(' +func + ')dx';
     let form = this.state.formula + val;
@@ -461,9 +461,9 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public doubleIntegral() {
     //console.log(this.state.formula);
-    let lower = prompt("Please enter lower limit of the inner integral", "Lower limit of inner integral");
-    var upper = prompt("Please enter upper limit of the inner integral", "Upper limit of inner integral");
-    var func = prompt("Please enter value within the inner integral", "Value within the inner integral");
+    let lower = prompt("Please enter lower limit of the inner integral", "");
+    var upper = prompt("Please enter upper limit of the inner integral", "");
+    var func = prompt("Please enter value within the inner integral", "");
 
     let val = '\\iint_{' + lower + '}^{' + upper + '}{(' + func + ')}dx';
     let form = this.state.formula + val;
@@ -480,8 +480,8 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public partialDifferential() {
     //console.log(this.state.formula);
-    let numerator = prompt("Please enter differential's numerator", "Differential's numerator");
-    var denominator = prompt("Please enter differential's denominator", "Differential's denominator");
+    let numerator = prompt("Please enter differential's numerator", "");
+    var denominator = prompt("Please enter differential's denominator", "");
 
     let val = '\\frac{\\partial ' + numerator + '}{\\partial ' + denominator + '}';
     let form = this.state.formula + val;
@@ -498,7 +498,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public firstAccent() {
     //console.log(this.state.formula);
-    let base = prompt("Please enter function value within the accent", "Function value within the accent");
+    let base = prompt("Please enter function value within the accent", "");
 
     let val = '\\dot{(' + base + ')}';
     let form = this.state.formula + val;
@@ -515,7 +515,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public secondAccent() {
     //console.log(this.state.formula);
-    let base = prompt("Please enter function value within the accent", "Function value within the accent");
+    let base = prompt("Please enter function value within the accent", "");
 
     let val = '\\ddot{(' + base + ')}';
     let form = this.state.formula + val;
@@ -532,7 +532,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public thirdAccent() {
     //console.log(this.state.formula);
-    let base = prompt("Please enter function value within the accent", "Function value within the accent");
+    let base = prompt("Please enter function value within the accent", "");
 
     let val = '\\dddot{(' + base + ')}';
     let form = this.state.formula + val;
@@ -549,8 +549,8 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
   public radical() {
     //console.log(this.state.formula);
-    let base = prompt("Please choose type of radical", "Enter numeric value for type of radical");
-    let func = prompt("Please type value which will be under the radical", "Value under the radical");
+    let base = prompt("Please choose type of radical", "");
+    let func = prompt("Please type value which will be under the radical", "");
 
     let val = '\\sqrt[' + func + ']{(' + base + ')}';
     let form = this.state.formula + val;
@@ -956,9 +956,9 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
     public sqr_sqrt() {
       //console.log(this.state.formula);
-      let func = prompt('Please enter the function', "Function");
-      let numerator = prompt("Please enter number for sqr", "Sqr");
-      var denominator = prompt("Please enter number for sqrt", "Sqrt");
+      let func = prompt('Please enter the function', "");
+      let numerator = prompt("Please enter number for sqr", "");
+      var denominator = prompt("Please enter number for sqrt", "");
   
       let val = '({' + func + '})^\\frac{' + numerator + '}{' + denominator + '}';
       let form = this.state.formula + val;
@@ -975,7 +975,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
     public sinx() {
       //console.log(this.state.formula);
-      let base = prompt("Please enter function value within the sin", "Function value within the sin");
+      let base = prompt("Please enter function value within the sin", "");
   
       let val = '\\sin{(' + base + ')}';
       let form = this.state.formula + val;
@@ -992,7 +992,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
     public cosx() {
       //console.log(this.state.formula);
-      let base = prompt("Please enter function value within the cos", "Function value within the cos");
+      let base = prompt("Please enter function value within the cos", "");
   
       let val = '\\cos{(' + base + ')}';
       let form = this.state.formula + val;
@@ -1009,7 +1009,7 @@ export class CreateIdea extends React.Component<ICreateIdeaProps, ICreateIdeaSta
 
     public tgx() {
       //console.log(this.state.formula);
-      let base = prompt("Please enter function value within the tan", "Function value within the tan");
+      let base = prompt("Please enter function value within the tan", "");
   
       let val = '\\tan{(' + base + ')}';
       let form = this.state.formula + val;
