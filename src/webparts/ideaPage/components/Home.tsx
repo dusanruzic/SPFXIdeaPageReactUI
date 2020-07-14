@@ -49,8 +49,12 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
           //console.log(this.state.authorName);
           if (item.Attachments){ 
             item.AttachmentFiles.map (img => {
-              imgs.push(`https://jvspdev.sharepoint.com${img.ServerRelativeUrl}`);
+              imgs.push(`https://edvac.sharepoint.com/${img.ServerRelativeUrl}`);
             });
+          }
+          else {
+            imgs.push(`https://edvac.sharepoint.com/sites/VIN_AVT_PCO_ElementWikiproject/SiteAssets/SitePages/VIN_AVT_PCO_ElementWikiproject/24687-AC.jpg`);
+          }
           
             if(item.IdeaStatus == 'OPEN') {
               this.setState({
@@ -67,7 +71,7 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
                 color: 'red'
               });
             }
-          }
+          
 
           
 
@@ -300,7 +304,7 @@ export  class Home extends React.Component<IHomeProps, IHomeState> {
   }
 
   public changeStatus(newStatus: string){
-    let url = `/_api/lists/getbyid('${SharePointService.ideaListID}')/items(${SharePointService.itemID})`;
+    let url = `/_api/lists/getbytitle('${SharePointService.ideaListID}')/items(${SharePointService.itemID})`;
     
     SharePointService.changeStatus(url, newStatus).then(rs => {
       //console.log(rs);
