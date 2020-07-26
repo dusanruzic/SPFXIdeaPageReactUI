@@ -37,7 +37,7 @@ export default class IdeaPageWebPart extends BaseClientSideWebPart<IIdeaPageWebP
       let ideaListID = 'Idea';
 
       let itemID = parseInt(this.properties.description);
-      //let itemID = 2; //65 je id za koji je neko drugi kreator - za test
+      //let itemID = 5; //65 je id za koji je neko drugi kreator - za test
 
       SharePointService.setup(this.context, Environment.type, itemID, ideaListID);
 
